@@ -11,6 +11,7 @@
         
         public string CategoryName { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? ImageLocalPath { get; set; }
     }
 }

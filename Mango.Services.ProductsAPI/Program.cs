@@ -53,6 +53,9 @@ builder.AddAppAuthetication();
 
 var app = builder.Build();
 
+app.UseCors(builder =>
+           builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -67,6 +70,8 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseStaticFiles();
+
 app.MapControllers();
 ApplyMigration();
 
@@ -80,6 +85,7 @@ void ApplyMigration()
         if (_db.Database.GetPendingMigrations().Count() > 0)
         {
             _db.Database.Migrate();
+
         }
     }
 }

@@ -71,8 +71,8 @@ namespace Mango.Web.Controllers
 
             CartDetailsDto cartDetails = new CartDetailsDto()
             {
-                Count = productDto.Count,
-                ProductId = productDto.ProductId,
+                Count = (int) productDto.Count,
+                ProductId =(int) productDto.ProductId,
             };
             List<CartDetailsDto> cartDetailsDtos= new() { cartDetails};
             cartDto.CartDetails = cartDetailsDtos;

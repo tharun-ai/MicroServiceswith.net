@@ -45,7 +45,7 @@ namespace Mango.Services.AuthAPI.Services
 
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
-            var _user=_db.ApplicationUsers.FirstOrDefault(u=>u.UserName.ToLower()==loginRequestDto.Username.ToLower());
+            var _user=_db.ApplicationUsers.FirstOrDefault(u=>u.Email.ToLower()==loginRequestDto.Username.ToLower());
             bool isValid=await _userManager.CheckPasswordAsync(_user,loginRequestDto.Password);
             if(_user==null || isValid==false) {
                return new LoginResponseDto() { User=null,Token=""};
@@ -85,7 +85,7 @@ namespace Mango.Services.AuthAPI.Services
                 var result=await _userManager.CreateAsync(user,registrationRequestDto.Password);
                 if (result.Succeeded)
                 {
-                    var userToReturn=_db.ApplicationUsers.First(u=>u.UserName== registrationRequestDto.Name);
+                    var userToReturn=_db.ApplicationUsers.First(u=>u.Email== registrationRequestDto.Email);
                     UserDto userDto = new()
                     {
                         Email = userToReturn.Email,
